@@ -1,5 +1,5 @@
 /*!
-# AoC 2022 Day 3 part 1
+# AoC 2022 Day 3 part 2
 See the description of the puzzle at <https://adventofcode.com/2022/day/3>.\
 Many thanks to Eric Wastl for providing these challenges.
 
