@@ -1,0 +1,10 @@
+# ignore these files
+*.log
+Cargo.lock
+dhat-heap.json
+
+# ignore ALL files in these directories
+target/ 
+res/
+day-xx_master/
+.vscode/

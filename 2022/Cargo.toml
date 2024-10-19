@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+
+members = ["day-*"]
+
+[workspace.dependencies]
+aoc_file_reader = { path = "../aoc_file_reader" }
+dhat = "0.3"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[profile.dhat]
+inherits = "release"
+debug = 1

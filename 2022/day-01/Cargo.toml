@@ -1,5 +1,5 @@
 [package]
-name = "day-06"
+name = "day-01"
 version = "0.1.0"
 edition = "2021"
 
@@ -11,7 +11,7 @@ dhat.workspace = true
 criterion.workspace = true
 
 [[bench]]
-name = "day-06-bench-criterion"
+name = "day-01-bench-criterion"
 path = "benches/benchmarks-criterion.rs"
 harness = false
 
