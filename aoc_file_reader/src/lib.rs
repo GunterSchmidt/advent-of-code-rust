@@ -23,7 +23,7 @@ pub fn read_file(filename: &str) -> String {
         }
     }
     // return input
-    std::fs::read_to_string(path).expect("Could not read file: {file_path}")
+    std::fs::read_to_string(path).expect(format!("Could not read file: {file_path}").as_str())
 }
 
 #[cfg(test)]
