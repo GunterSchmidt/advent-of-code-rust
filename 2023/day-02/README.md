@@ -3,8 +3,8 @@ Here two different solutions are presented to show the impact of the algorithm o
 The fast versions avoid any string operation and use the bytes of the string only. This is 
 10 times faster.
 
-part1_str:  0.0119 ms  
-part1_fast: 0.0011 ms  
+part1_str:  0.117 ms  
+part1_fast: 0.010 ms 
 
-part2_str:  0.0170 ms  
-part2_fast: 0.0014 ms  
+part2_str:  0.170 ms  
+part2_fast: 0.014 ms 
