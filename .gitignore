@@ -2,6 +2,9 @@
 *.log
 Cargo.lock
 dhat-heap.json
+flamegraph.svg
+perf.data
+sync.ffs_db
 
 # ignore ALL files in these directories
 target/ 

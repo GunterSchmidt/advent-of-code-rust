@@ -11,3 +11,6 @@ criterion = { version = "0.5", features = ["html_reports"] }
 [profile.dhat]
 inherits = "release"
 debug = 1
+
+[profile.release]
+debug = true
