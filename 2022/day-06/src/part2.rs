@@ -66,31 +66,31 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process_0() {
+    fn test_0() {
         let input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
         assert_eq!("19", solve_puzzle(input));
     }
 
     #[test]
-    fn test_process_1() {
+    fn test_1() {
         let input = "bvwbjplbgvbhsrlpgdmjqwftvncz";
         assert_eq!("23", solve_puzzle(input));
     }
 
     #[test]
-    fn test_process_2() {
+    fn test_2() {
         let input = "nppdvjthqldpwncqszvftbrmjlhg";
         assert_eq!("23", solve_puzzle(input));
     }
 
     #[test]
-    fn test_process_3() {
+    fn test_3() {
         let input = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
         assert_eq!("29", solve_puzzle(input));
     }
 
     #[test]
-    fn test_process_4() {
+    fn test_4() {
         let input = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
         assert_eq!("26", solve_puzzle(input));
     }

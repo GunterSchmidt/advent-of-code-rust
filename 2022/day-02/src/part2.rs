@@ -94,7 +94,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "A Y
 B X
 C Z

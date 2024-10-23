@@ -33,7 +33,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "    [D]    
 [N] [C]    
 [Z] [M] [P]

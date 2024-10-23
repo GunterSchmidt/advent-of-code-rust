@@ -39,7 +39,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "2-4,6-8
 2-3,4-5
 5-7,7-9

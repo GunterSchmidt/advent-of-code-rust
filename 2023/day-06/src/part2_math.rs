@@ -69,7 +69,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "Time:      7  15   30
 Distance:  9  40  200";
         assert_eq!("71503", solve_puzzle(input));

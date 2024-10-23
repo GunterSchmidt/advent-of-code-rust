@@ -60,7 +60,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "two1nine
 eightwothree
 abcone2threexyz

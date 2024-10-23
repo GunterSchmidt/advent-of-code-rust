@@ -189,7 +189,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "seeds: 79 14 55 13
 
 seed-to-soil map:
