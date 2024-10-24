@@ -20,7 +20,7 @@ This is keys outer, directions inner.
 
 */
 
-use crate::part1::parse_input;
+use crate::part1_hashmap::parse_input;
 
 /// The logic is to find the first end of the sequence and count the steps required.
 /// It is then assumed this step count will repeat.
@@ -55,18 +55,19 @@ pub fn solve_puzzle_v1(input: &str) -> String {
     }
 
     // get the least common dominator
-    let combined_result = least_common_denominator(&found_z_steps);
+    let combined_result = least_common_denominator_with_multiplication(&found_z_steps);
 
     combined_result.to_string()
 }
 
 // source for this function: https://github.com/ChristopherBiscardi/advent-of-code/blob/main/2023/rust/day-08/src/part2.rs
-pub fn least_common_denominator(nums: &[u64]) -> u64 {
+// also available in num_integer
+pub fn least_common_denominator_with_multiplication(nums: &[u64]) -> u64 {
     if nums.len() == 1 {
         return nums[0];
     }
     let a = nums[0];
-    let b = least_common_denominator(&nums[1..]);
+    let b = least_common_denominator_with_multiplication(&nums[1..]);
     a * b / greatest_common_divisor_of_two_numbers(a, b)
 }
 
@@ -87,7 +88,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "LR
 
 11A = (11B, XXX)

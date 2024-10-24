@@ -17,8 +17,8 @@ I am using LEFT = 0 and RIGHT = 1 instead of an enum, because this allows direct
 
 use hashbrown::HashMap;
 
-pub const START_KEY: u32 = address_to_number("AAA");
-pub const END_KEY: u32 = address_to_number("ZZZ");
+pub const START_KEY: u32 = address_to_number(&[b'A', b'A', b'A']);
+pub const END_KEY: u32 = address_to_number(&[b'Z', b'Z', b'Z']);
 
 /// This uses a simple for loop
 pub fn solve_puzzle(input: &str) -> String {
@@ -64,9 +64,11 @@ pub fn parse_input(input: &str) -> (Vec<usize>, HashMap<u32, [u32; 2]>, Vec<u32>
     lines.next();
 
     while let Some(line) = lines.next() {
-        let key = address_to_number(&line[0..3]);
-        let left = address_to_number(&line[7..10]);
-        let right = address_to_number(&line[12..15]);
+        let line = line.as_bytes();
+        let key = (line[0] as u32) << 16 | (line[1] as u32) << 8 | line[2] as u32;
+        let left = (line[7] as u32) << 16 | (line[8] as u32) << 8 | line[9] as u32;
+        let right = (line[12] as u32) << 16 | (line[13] as u32) << 8 | line[14] as u32;
+
         if key as u8 == b'A' {
             start_keys.push(key);
         }
@@ -78,16 +80,14 @@ pub fn parse_input(input: &str) -> (Vec<usize>, HashMap<u32, [u32; 2]>, Vec<u32>
 }
 
 /// Converts [u8;3] into u32
-pub const fn address_to_number(address: &str) -> u32 {
-    let b = address.as_bytes();
-    let n = (b[0] as u32) << 16 | (b[1] as u32) << 8 | b[2] as u32;
-    n
+const fn address_to_number(address: &[u8]) -> u32 {
+    (address[0] as u32) << 16 | (address[1] as u32) << 8 | address[2] as u32
 }
 
-pub fn number_to_address(n: u32) -> String {
-    let b = n.to_be_bytes();
-    core::str::from_utf8(&b[1..]).unwrap().to_string()
-}
+// pub fn number_to_address(n: u32) -> String {
+//     let b = n.to_be_bytes();
+//     core::str::from_utf8(&b[1..]).unwrap().to_string()
+// }
 
 #[cfg(test)]
 mod tests {

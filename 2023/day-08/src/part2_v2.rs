@@ -21,8 +21,8 @@ This is directions outer, keys inner, which is twice as fast.
 */
 
 use crate::{
-    part1::parse_input,
-    part2_v1::{last_is_z, least_common_denominator},
+    part1_hashmap::parse_input,
+    part2_v1::{last_is_z, least_common_denominator_with_multiplication},
 };
 
 /// This loop is almost twice as fast af part2_v1, reason unknown
@@ -63,7 +63,7 @@ pub fn solve_puzzle_v2(input: &str) -> String {
         }
         result_steps += 1;
     }
-    let combined_result = least_common_denominator(&found_z_steps);
+    let combined_result = least_common_denominator_with_multiplication(&found_z_steps);
 
     combined_result.to_string()
 }
@@ -73,7 +73,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "LR
 
 11A = (11B, XXX)

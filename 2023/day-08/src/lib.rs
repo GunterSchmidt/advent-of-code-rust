@@ -1,7 +1,9 @@
-pub mod part1;
+pub mod part1_array;
+pub mod part1_hashmap;
 pub mod part2_v1;
 pub mod part2_v2;
 pub mod part2_v3_array;
+pub mod part2_v4_array_16_bit_key;
 
 // required for bench
 pub const DAY_STR: &str = "day_08";

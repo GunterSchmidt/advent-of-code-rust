@@ -12,12 +12,12 @@ Source Code: <https://github.com/GunterSchmidt/advent-of-code-rust>
 
 An array is about 30% faster but this is only an option, if the actual
 size of the data known and limited in size. Large arrays can lead to a
-stack overflow error. Try using u8 or u16 instead of usize. Casting is 
+stack overflow error. Try using u8 or u16 instead of usize. Casting is
 inexpensive.
 
 */
 
-use crate::part2_v1::least_common_denominator;
+use crate::part2_v1::least_common_denominator_with_multiplication;
 
 pub fn solve_puzzle_array(input: &str) -> String {
     // The key only needs to be u8 but needs to be casted to usize for array access.
@@ -51,7 +51,8 @@ pub fn solve_puzzle_array(input: &str) -> String {
             .iter()
             .map(|c| {
                 match c {
-                    // numbers are only used in the test example
+                    // get letters for key and subtract A so array is 0-25
+                    // numbers are only used in the test example and are merged in letter range
                     b'1'..=b'9' => (*c - 44) as Key,
                     b'A'..=b'Z' => (*c - b'A') as Key,
                     _ => *c as Key,
@@ -59,7 +60,6 @@ pub fn solve_puzzle_array(input: &str) -> String {
             })
             .collect::<Vec<_>>();
 
-        // get letters for key and subtract A so array is 0-25
         let key: [Key; 3] = line[0..3].try_into().unwrap();
         let left: [Key; 3] = line[7..10].try_into().unwrap();
         let right: [Key; 3] = line[12..15].try_into().unwrap();
@@ -70,7 +70,7 @@ pub fn solve_puzzle_array(input: &str) -> String {
         map_array[key[0] as usize][key[1] as usize][key[2] as usize] = [left, right];
     }
 
-    // loop data
+    // find pathes ends
     let key_count = start_keys.len();
     let mut found_z_steps: Vec<u64> = vec![0; key_count];
 
@@ -90,6 +90,7 @@ pub fn solve_puzzle_array(input: &str) -> String {
             let next_key = curr_left_right[k][*d];
             if next_key[2] == END_KEY {
                 found_z_steps[k] = result_steps;
+                // dbg!(&found_z_steps);
                 // remove this key, we have the loop result
                 let index = key_i.iter().position(|&r| r == k).unwrap();
                 key_i.remove(index);
@@ -104,7 +105,7 @@ pub fn solve_puzzle_array(input: &str) -> String {
         }
         result_steps += 1;
     }
-    let combined_result = least_common_denominator(&found_z_steps);
+    let combined_result = least_common_denominator_with_multiplication(&found_z_steps);
 
     combined_result.to_string()
 }
@@ -114,7 +115,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process() {
+    fn test() {
         let input = "LR
 
 11A = (11B, XXX)
