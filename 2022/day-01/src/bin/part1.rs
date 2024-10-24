@@ -1,5 +1,5 @@
 use aoc_file_reader::read_file;
-use day_01::{part1::solve_puzzle, FILENAME_PART_1};
+use day_01::{part1, FILENAME_PART_1};
 
 #[cfg(feature = "dhat-heap")]
 #[global_allocator]
@@ -10,5 +10,5 @@ fn main() {
     let _profiler = dhat::Profiler::new_heap();
 
     let input = read_file(FILENAME_PART_1);
-    println!("{}", solve_puzzle(&input));
+    println!("{}", part1::solve_puzzle(&input));
 }

@@ -25,7 +25,9 @@ fn criterion_benchmark_part2(c: &mut Criterion) {
     group.warm_up_time(Duration::from_millis(WARM_UP_TIME_MS));
     group.measurement_time(Duration::from_millis(MEASUREMENT_TIME_MS));
 
-    group.bench_with_input("part2", &input, |b, input| b.iter(|| part2::process(input)));
+    group.bench_with_input("part2", &input, |b, input| {
+        b.iter(|| part2::solve_puzzle(input))
+    });
     group.finish();
 }
 

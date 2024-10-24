@@ -8,80 +8,52 @@ Copyright (c) 2024 Gunter Schmidt.\
 Source Code: <https://github.com/GunterSchmidt/advent-of-code-rust>
 ---
 
-The top 3 list is created on the stack with an array for better performance.
+Using fold to solve the puzzle.
 
 */
-use crate::part1::{Calory, Elf};
 
-type Top3 = [Calory; 3];
+use crate::part1::atoi;
 
-pub fn process(input: &str) -> String {
-    let elfes = Elf::parse_input(input);
-
-    let top_3 = top_3_v2(&elfes);
-    let sum = top_3.iter().sum::<u32>();
-    sum.to_string()
-}
-
-#[allow(dead_code)]
-/// Simple version
-fn top_3_v1(elfes: &[Elf]) -> Top3 {
-    // create top 3 list
-    // array based, as this is faster than a vector
-    let mut top_3 = [0; 3];
-    for elf in elfes.iter() {
-        let cal = elf.sum_calories();
-        let mut i = 0;
-        while i < 3 {
-            if cal > top_3[i] {
-                // shift elements to keep array sorted
-                let mut j = 2;
-                while j > i {
-                    top_3[j] = top_3[j - 1];
-                    j -= 1;
+pub fn solve_puzzle(input: &str) -> String {
+    // Forcing empty line so that the last value is used.
+    const END: [&[u8]; 1] = [&[0b0]];
+    let (_, top_3) = input.as_bytes().split(|b| *b == b'\n').chain(END).fold(
+        (0, [0; 3]),
+        |(elf_calories, top_3), line| {
+            if line.is_empty() || line[0] == 0 {
+                // reset elf counter
+                if elf_calories < top_3[2] {
+                    (0, top_3)
+                } else {
+                    // complicated but fast top 3 implementation
+                    let mut top_3_new = top_3.clone();
+                    let mut i = 0;
+                    while i < 3 {
+                        if elf_calories > top_3[i] {
+                            top_3_new[i] = elf_calories;
+                            // shift elements to keep array sorted
+                            let mut j = 2;
+                            while j > i {
+                                top_3_new[j] = top_3[j - 1];
+                                j -= 1;
+                            }
+                            return (0, top_3_new);
+                        } else {
+                            top_3_new[i] = top_3[i];
+                        }
+                        i += 1;
+                    }
+                    panic!("logic error")
                 }
-                top_3[i] = cal;
-                break;
+            } else {
+                // add calory for current elf
+                // let elf_calories = elf_calories + line.parse::<u32>().unwrap();
+                let elf_calories = elf_calories + atoi(line);
+                (elf_calories, top_3)
             }
-            i += 1;
-        }
-    }
-
-    top_3
-}
-
-#[allow(dead_code)]
-/// Slightly improved version checking on last element first to avoid search from top.
-/// Also using local memory instead of array access. Very small improvement.
-/// Backwards search would be possible but would require more logic to find insert position.
-fn top_3_v2(elfes: &[Elf]) -> Top3 {
-    // create top 3 list
-    // array based, as this is faster than a vector
-    let mut top_3 = [0; 3];
-    let mut min = 0;
-    for elf in elfes.iter() {
-        let cal = elf.sum_calories();
-        if cal < min {
-            continue;
-        }
-        let mut i = 0;
-        while i < 3 {
-            if cal > top_3[i] {
-                // shift elements to keep array sorted
-                let mut j = 2;
-                while j > i {
-                    top_3[j] = top_3[j - 1];
-                    j -= 1;
-                }
-                top_3[i] = cal;
-                min = top_3[2];
-                break;
-            }
-            i += 1;
-        }
-    }
-
-    top_3
+        },
+    );
+    top_3.iter().sum::<usize>().to_string()
 }
 
 #[cfg(test)]
@@ -104,6 +76,6 @@ mod tests {
 9000
 
 10000";
-        assert_eq!("45000", process(input));
+        assert_eq!("45000", solve_puzzle(input));
     }
 }
