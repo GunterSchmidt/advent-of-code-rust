@@ -29,15 +29,15 @@ pub enum RockPaperScissors {
     ScissorsWin,
 }
 
-impl From<char> for RockPaperScissors {
-    fn from(char: char) -> Self {
+impl From<u8> for RockPaperScissors {
+    fn from(char: u8) -> Self {
         match char {
-            'A' => Self::RockLoose,
-            'B' => Self::PaperDraw,
-            'C' => Self::ScissorsWin,
-            'X' => Self::RockLoose,
-            'Y' => Self::PaperDraw,
-            'Z' => Self::ScissorsWin,
+            b'A' => Self::RockLoose,
+            b'B' => Self::PaperDraw,
+            b'C' => Self::ScissorsWin,
+            b'X' => Self::RockLoose,
+            b'Y' => Self::PaperDraw,
+            b'Z' => Self::ScissorsWin,
             _ => panic!("unknown character"),
         }
     }
@@ -76,17 +76,19 @@ fn calc_winnings(strategy: &[(RockPaperScissors, RockPaperScissors)]) -> usize {
 }
 
 fn parse_data(input: &str) -> Vec<(RockPaperScissors, RockPaperScissors)> {
-    let mut strategy: Vec<(RockPaperScissors, RockPaperScissors)> = Vec::new();
-    for line in input.lines() {
-        if let Some((other, myself)) = line.split_once(' ') {
-            strategy.push((
-                RockPaperScissors::from(other.chars().next().unwrap()),
-                RockPaperScissors::from(myself.chars().next().unwrap()),
-            ));
-        }
-    }
-
-    strategy
+    input
+        .as_bytes()
+        .split(|c| *c == b'\n')
+        .filter_map(|line| {
+            if line.is_empty() {
+                return None;
+            }
+            Some((
+                RockPaperScissors::from(line[0]),
+                RockPaperScissors::from(line[2]),
+            ))
+        })
+        .collect::<Vec<_>>()
 }
 
 #[cfg(test)]
