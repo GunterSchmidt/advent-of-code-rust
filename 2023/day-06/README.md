@@ -2,6 +2,7 @@
 
 This puzzle is quite easy to solve with brute force. The more interesting part is
 to make the code fast by using mathematics, which in my case is 100000 times faster for part 2.
+Rewriting the parser saved another 50%.
 
 The resulting race distance (d) is calculated as the (race time (t) minus the time for the button press (b))
 times the resulting speed (s). Goal is to beat the current record (r).  
@@ -24,8 +25,8 @@ s = 15 +/-
 ---
 
 part1_loop:  0.000619 ms  
-part1_math:  0.000352 ms  
+part1_math:  0.000151 ms  
 
 part2_loop: 22.264000 ms  
-part2_math:  0.000204 ms  
+part2_math:  0.000118 ms  
 

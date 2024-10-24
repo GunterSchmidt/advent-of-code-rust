@@ -10,7 +10,7 @@ fn criterion_benchmark_part1(c: &mut Criterion) {
     group.warm_up_time(Duration::from_millis(WARM_UP_TIME_MS));
     group.measurement_time(Duration::from_millis(MEASUREMENT_TIME_MS));
 
-    group.bench_with_input("part1_gsc", &input, |b, input| {
+    group.bench_with_input("part1_loop", &input, |b, input| {
         b.iter(|| part1_loop::solve_puzzle(input))
     });
     group.bench_with_input("part1_math", &input, |b, input| {
@@ -28,7 +28,7 @@ fn criterion_benchmark_part2(c: &mut Criterion) {
     group.warm_up_time(Duration::from_millis(WARM_UP_TIME_MS));
     group.measurement_time(Duration::from_millis(MEASUREMENT_TIME_MS));
 
-    group.bench_with_input("part2_gsc", &input, |b, input| {
+    group.bench_with_input("part2_loop", &input, |b, input| {
         b.iter(|| part2_loop::solve_puzzle(input))
     });
     group.bench_with_input("part2_math", &input, |b, input| {

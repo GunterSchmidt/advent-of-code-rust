@@ -31,40 +31,73 @@ x = -(x/2) +/- SQRT((p/2)^2-q)
 s = -(-30/2) +/- SQRT((30/2)^2-200)
 s = 15 +/-
 
+Also squeezing out parsing.
+
 */
 
 /// Calculates the won races depending on button push time.
 pub fn solve_puzzle(input: &str) -> String {
     // parse data, time is first line, record distance is second line
-    let races = input
-        .lines()
-        .map(|line| {
-            let p = line.find(':').expect("data has wrong format") + 1;
-            let mut data: Vec<u64> = Vec::with_capacity(4);
-            // avoid string manipulation
-            let mut n = 0;
-            line[p..].chars().for_each(|c| {
-                if c.is_ascii_digit() {
-                    n = n * 10 + c.to_digit(10).unwrap() as u64;
-                } else if n > 0 {
-                    data.push(n);
-                    n = 0;
-                }
-            });
-            if n > 0 {
-                data.push(n);
-            }
+    // this is normal
+    // let races = input
+    //     .lines()
+    //     .map(|line| {
+    //         line.split_ascii_whitespace()
+    //             .filter_map(|n| n.parse::<u64>().ok())
+    //             .collect::<Vec<_>>()
+    //     })
+    //     .collect::<Vec<_>>();
 
-            data
-        })
-        .collect::<Vec<_>>();
-    // dbg!(&races);
+    let mut race_times = [0; 4];
+    let mut n_race_times = 0;
+    let mut race_distances = [0; 4];
+    let mut n_race_distances = 0;
+
+    let mut num_started = false;
+    let mut is_distance = false;
+    let mut n = 0;
+    for &c in input.as_bytes().iter().skip(12) {
+        match c {
+            b'0'..=b'9' => {
+                if !num_started {
+                    num_started = true;
+                    n = (c - b'0') as u16;
+                } else {
+                    n = n * 10 + (c - b'0') as u16;
+                }
+            }
+            b'\n' => {
+                if num_started {
+                    num_started = false;
+                    if is_distance {
+                        race_distances[n_race_distances] = n;
+                        n_race_distances += 1;
+                    } else {
+                        race_times[n_race_times] = n;
+                        n_race_times += 1;
+                    }
+                }
+                is_distance = true;
+            }
+            _ => {
+                if num_started {
+                    num_started = false;
+                    if is_distance {
+                        race_distances[n_race_distances] = n;
+                        n_race_distances += 1;
+                    } else {
+                        race_times[n_race_times] = n;
+                        n_race_times += 1;
+                    }
+                }
+            }
+        }
+    }
 
     let mut winning_races_count = 1;
-    for (i, race_time_ms) in races[0].iter().enumerate() {
-        // let race_time_ms = races[0][i] as f64;
-        let record_distance_mm = races[1][i] as f64;
-        let rt2 = *race_time_ms as f64 / 2.0;
+    for (i, race_time_ms) in race_times[0..n_race_times].iter().enumerate() {
+        let record_distance_mm = race_distances[i] as f32;
+        let rt2 = *race_time_ms as f32 / 2.0;
         let sq = (rt2 * rt2 - record_distance_mm).sqrt();
         let r1 = rt2 - sq;
         let r2 = rt2 + sq;

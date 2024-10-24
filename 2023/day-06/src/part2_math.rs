@@ -35,23 +35,51 @@ s = 15 +/-
 
 /// Calculates the won races depending on button push time.
 pub fn solve_puzzle(input: &str) -> String {
-    let races = input
-        .lines()
-        .map(|line| {
-            let p = line.find(':').expect("data has wrong format") + 1;
-            let mut n = 0;
-            line[p..].chars().for_each(|c| {
-                if c.is_ascii_digit() {
-                    n = n * 10 + c.to_digit(10).unwrap() as u64;
+    // let races = input
+    //     .lines()
+    //     .map(|line| {
+    //         let p = line.find(':').expect("data has wrong format") + 1;
+    //         let mut n = 0;
+    //         line[p..].chars().for_each(|c| {
+    //             if c.is_ascii_digit() {
+    //                 n = n * 10 + c.to_digit(10).unwrap() as u64;
+    //             }
+    //         });
+    //         n
+    //     })
+    //     .collect::<Vec<_>>();
+    type Fxx = f64;
+
+    let mut race_time_ms = 0.0;
+    let mut record_distance_mm = 0.0;
+
+    let mut is_distance = false;
+    let mut n = 0;
+    for &c in input.as_bytes().iter().skip(12) {
+        match c {
+            b'0'..=b'9' => {
+                n = n * 10 + (c - b'0') as u64;
+            }
+            b'\n' => {
+                if is_distance {
+                    record_distance_mm = n as Fxx;
+                } else {
+                    race_time_ms = n as Fxx;
+                    is_distance = true;
+                    n = 0;
                 }
-            });
-            n
-        })
-        .collect::<Vec<_>>();
+            }
+            _ => {
+                if is_distance {
+                    record_distance_mm = n as Fxx;
+                } else {
+                    race_time_ms = n as Fxx;
+                }
+            }
+        }
+    }
 
     // this is actually only one race
-    let race_time_ms = races[0] as f64;
-    let record_distance_mm = races[1] as f64;
     let rt2 = race_time_ms / 2.0;
     let sq = (rt2 * rt2 - record_distance_mm).sqrt();
     let r1 = rt2 - sq;
