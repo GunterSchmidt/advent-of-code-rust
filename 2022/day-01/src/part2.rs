@@ -15,7 +15,7 @@ Using fold to solve the puzzle.
 use crate::part1::atoi;
 
 pub fn solve_puzzle(input: &str) -> String {
-    // Forcing empty line so that the last value is used.
+    // Adding end marker so that the last value is used.
     const END: [&[u8]; 1] = [&[0b0]];
     let (_, top_3) = input.as_bytes().split(|b| *b == b'\n').chain(END).fold(
         (0, [0; 3]),

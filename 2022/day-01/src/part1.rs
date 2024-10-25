@@ -13,34 +13,6 @@ This is a simple sum function.
 
 */
 
-pub type Calory = u32;
-pub struct Elf {
-    pub calories: Vec<Calory>,
-}
-
-impl Elf {
-    pub fn sum_calories(&self) -> Calory {
-        self.calories.iter().sum()
-    }
-
-    /// reads the input and converts it into a vector of elfes
-    pub fn parse_input(input: &str) -> Vec<Elf> {
-        let mut elfes = Vec::with_capacity(100);
-        let mut calories = Vec::with_capacity(15);
-        for line in input.lines() {
-            if line.is_empty() {
-                elfes.push(Elf { calories });
-                calories = Vec::with_capacity(15);
-            } else {
-                calories.push(line.parse::<Calory>().unwrap());
-            }
-        }
-        elfes.push(Elf { calories });
-
-        elfes
-    }
-}
-
 /// The main function for this puzzle.
 pub fn solve_puzzle(input: &str) -> String {
     let (_, max) =
