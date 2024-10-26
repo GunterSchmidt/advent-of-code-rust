@@ -23,4 +23,12 @@ Otherwise please change the const values in the lib.rs files.
 A lot of puzzles require very small amounts of time to solve. More than half of the time is spent
 to parse the data. Using input.as_bytes() greatly improves speed as all puzzle inputs are in ASCII.
 
+Avoiding to import the data into vectors or the like and instead working with the input data directly is also very beneficial.
 
+## Small vectors
+Small vectors can be handled on the stack with crate [SmallVec](https://docs.rs/smallvec/latest/smallvec/).
+The amount of time saved can be 30-50%. Arrays are an alternative, too.
+
+## Numbers
+
+Interesting enough, 32-Bit calculations can be faster than 64-bit calculations, even on 64-bit systems.

@@ -7,10 +7,13 @@ members = ["day-*"]
 
 [workspace.dependencies]
 aoc_file_reader = { path = "../aoc_file_reader" }
-
-dhat = "0.3"
+# atoi = "2.0.0"
 criterion = { version = "0.5", features = ["html_reports"] }
-regex = { version = "1.10.6", default-features = false }
+# criterion2 = "1.1.1"
+dhat = "0.3"
+hashbrown = "0.15.0"
+regex = { version = "1.11.1", default-features = false }
+smallvec = "1.13.2"
 
 [profile.dhat]
 inherits = "release"
