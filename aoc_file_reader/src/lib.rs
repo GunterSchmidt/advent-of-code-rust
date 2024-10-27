@@ -22,11 +22,17 @@ pub fn read_file(filename: &str) -> String {
     let mut file_path = AOC_RESOURCE_PATH.to_owned() + "/" + filename;
     let path = std::path::Path::new(&file_path);
     if !path.exists() && !path.is_absolute() {
-        // check current dir
-        let file_name = path.file_name().unwrap();
-        let curr_path = std::env::current_dir().unwrap().join(file_name);
+        // check one level lower, this is a debug issue
+        let curr_path = std::path::Path::new(&file_path[3..]);
         if curr_path.exists() {
             file_path = curr_path.to_str().unwrap().to_owned();
+        } else {
+            // check current dir
+            let file_name = path.file_name().unwrap();
+            let curr_path = std::env::current_dir().unwrap().join(file_name);
+            if curr_path.exists() {
+                file_path = curr_path.to_str().unwrap().to_owned();
+            }
         }
     }
 
