@@ -42,7 +42,7 @@ fn criterion_benchmark_part2(c: &mut Criterion) {
 
 criterion_group!(
     benches,
-    // criterion_benchmark_part1,
+    criterion_benchmark_part1,
     criterion_benchmark_part2
 );
 criterion_main!(benches);

@@ -66,7 +66,6 @@ pub fn parse_universe(input: &str, expansion_factor: Position) -> (Vec<u32>, Vec
     // Expand rows
     // Loop over rows, find gaps and add to expansion to following rows.
     // This works, because rows come in ascending.
-    // TODO smarter with vec, only one loop to add
     // let mut rows_unused = Vec::with_capacity(size / 10);
     let mut i_pos = galaxy_positions.0.len() - 1;
     let mut next_row = galaxy_positions.0[i_pos] - 1;

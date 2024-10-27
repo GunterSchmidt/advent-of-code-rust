@@ -1,5 +1,5 @@
 /*!
-# AoC 2023 Day 10 part 1
+# AoC 2023 Day 10 part 2
 See the description of the puzzle at <https://adventofcode.com/2023/day/10>.\
 Many thanks to Eric Wastl for providing these challenges.
 

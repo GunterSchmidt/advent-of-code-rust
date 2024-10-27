@@ -26,7 +26,7 @@ pub fn solve_puzzle(input: &str) -> String {
 }
 
 /// Searches for the common item.
-/// TODO This seems inefficient as the search could be cut on both ends if letters were sorted
+/// PERF This seems inefficient as the search could be cut on both ends if letters were sorted
 #[inline]
 fn search_common_item(line: &str) -> usize {
     let pos = line.len() / 2;

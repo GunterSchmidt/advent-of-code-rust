@@ -12,11 +12,11 @@ Source Code: <https://github.com/GunterSchmidt/advent-of-code-rust>
 
 Part 1: Follow a path by using Left and Right instructions.
 
-Part 2: Follow multiple pathes until all reach the end in the same step.
+Part 2: Follow multiple paths until all reach the end in the same step.
 
 ### Algorithmic Highlights
 
-Part 2 would have a very long runtime if the loop would be done until all pathes end simultaneously.
+Part 2 would have a very long runtime if the loop would be done until all paths end simultaneously.
 Instead each path is followed only once till the end, because then it will repeat itself.
 This allows the calculation of the result by using the least common dominator.
 

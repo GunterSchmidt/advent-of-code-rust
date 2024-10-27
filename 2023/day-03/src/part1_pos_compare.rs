@@ -120,7 +120,6 @@ pub fn solve_puzzle(input: &str) -> String {
 
     while let Some(next_line) = input_lines.next() {
         // shift work lines
-        // TODO swap
         lines[0] = lines[1];
         lines[1] = lines[2];
         let b_line = next_line.as_bytes();

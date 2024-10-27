@@ -12,7 +12,7 @@ Source Code: <https://github.com/GunterSchmidt/advent-of-code-rust>
 
 The program is looping over each row separately. This is a small amount of data.
 Instead of using an array SmallVec is used, which speeds up the logic by 50%.
-The atoi crate could have been used, but handimplementing the logic saves 10%.
+The atoi crate could have been used, but hand implementing the logic saves 10%.
 
 */
 

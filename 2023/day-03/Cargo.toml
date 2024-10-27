@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 aoc_file_reader.workspace = true
-hashbrown = "0.15.0"
+hashbrown.workspace = true
 
 [dev-dependencies]
 criterion.workspace = true
