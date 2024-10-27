@@ -5,6 +5,7 @@ dhat-heap.json
 flamegraph.svg
 perf.data
 sync.ffs_db
+test.*
 
 # ignore ALL files in these directories
 target/ 
