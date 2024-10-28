@@ -1,0 +1,23 @@
+[package]
+name = "day-05"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aoc_file_reader.workspace = true
+dhat.workspace = true
+hashbrown.workspace = true
+# smallvec.workspace = true
+md5 = "0.7.0"
+itoa = "1.0.4"
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "day-05-bench-criterion"
+path = "benches/benchmarks-criterion.rs"
+harness = false
+
+[features]
+dhat-heap = []
