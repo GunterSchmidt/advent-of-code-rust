@@ -23,7 +23,6 @@ fn parse_data(input: &str) -> (Vec<i32>, Vec<i32>) {
     let mut data_second = Vec::with_capacity(1000);
 
     // parse data as_bytes for performance reasons
-    // since only the delta is relevant, the ASCII code is kept
     let mut n = 0;
     for &c in input.as_bytes() {
         match c {
