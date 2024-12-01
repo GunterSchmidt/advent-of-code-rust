@@ -21,40 +21,14 @@ Since part2 data is sorted, the search can be limited to a small fraction of the
 
 */
 
-type Num = i32;
+use crate::parse_data;
 
 /// The main function for this puzzle.
 pub fn solve_puzzle(input: &str) -> String {
-    let mut data_first = Vec::with_capacity(1000);
-    let mut data_second = Vec::with_capacity(1000);
+    let (data_first, data_second) = parse_data(input);
 
-    // parse data as_bytes for performance reasons
-    let mut n = 0;
-    for &c in input.as_bytes() {
-        match c {
-            b'0'..=b'9' => n = n * 10 + (c - b'0') as Num,
-            b' ' => {
-                if n > 0 {
-                    data_first.push(n);
-                    n = 0;
-                }
-            }
-            b'\n' => {
-                data_second.push(n);
-                n = 0;
-            }
-            _ => (),
-        }
-    }
-    if n > 0 {
-        data_second.push(n);
-    }
-    assert_eq!(data_first.len(), data_second.len());
-    // sorting first allows later faster search
-    data_first.sort();
-    data_second.sort();
-
-    // This could be done with iter().position, but for performance the search is manually implemented.
+    // This could be done with iter().filter, but for performance the search is manually implemented.
+    // This allows to search only a small section of the second vector.
     let mut similarity = 0;
     let mut line_similarity = 0;
     let mut search_start = 0;

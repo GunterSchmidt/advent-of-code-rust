@@ -19,38 +19,11 @@ Instead of split a match function is used to save some time.
 
 */
 
-type Num = i32;
+use crate::parse_data;
 
 /// The main function for this puzzle.
 pub fn solve_puzzle(input: &str) -> String {
-    let mut data_first = Vec::with_capacity(1000);
-    let mut data_second = Vec::with_capacity(1000);
-
-    // parse data as_bytes for performance reasons
-    // since only the delta is relevant, the ASCII code is kept
-    let mut n = 0;
-    for &c in input.as_bytes() {
-        match c {
-            b'0'..=b'9' => n = n * 10 + c as Num,
-            b' ' => {
-                if n > 0 {
-                    data_first.push(n);
-                    n = 0;
-                }
-            }
-            b'\n' => {
-                data_second.push(n);
-                n = 0;
-            }
-            _ => (),
-        }
-    }
-    if n > 0 {
-        data_second.push(n);
-    }
-    assert_eq!(data_first.len(), data_second.len());
-    data_first.sort();
-    data_second.sort();
+    let (data_first, data_second) = parse_data(input);
 
     let mut delta = 0;
     for i in 0..data_first.len() {

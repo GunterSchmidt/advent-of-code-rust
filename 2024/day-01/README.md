@@ -26,6 +26,6 @@ Duration is measured with Criterion without file read but with parsing.
 
 | Test  | Duration |
 | ----- | -------- |
-| part1 | 0.050 ms |
-| part2 | 0.065 ms |
+| part1 | 0.035 ms |
+| part2 | 0.051 ms |
 
