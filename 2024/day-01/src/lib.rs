@@ -18,7 +18,7 @@ pub const WITH_OUTPUT_FILE: bool = false;
 
 type Num = i32;
 
-fn parse_data(input: &str) -> (Vec<i32>, Vec<i32>) {
+fn parse_data(input: &str) -> (Vec<Num>, Vec<Num>) {
     let mut data_first = Vec::with_capacity(1000);
     let mut data_second = Vec::with_capacity(1000);
 
