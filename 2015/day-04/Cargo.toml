@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 aoc_file_reader.workspace = true
 dhat.workspace = true
-hashbrown.workspace = true
+# hashbrown.workspace = true
 # smallvec.workspace = true
 md5 = "0.7.0"
 itoa = "1.0.4"

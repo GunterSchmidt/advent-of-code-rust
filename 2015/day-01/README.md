@@ -25,4 +25,3 @@ Using rust iter functionality. Extremely fast.
 | part1 | 0.001 ms |
 | part2 | 0.001 ms |
 
-/*!
