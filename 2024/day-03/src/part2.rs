@@ -47,6 +47,7 @@ pub fn solve_puzzle(input: &str) -> String {
                     }
                     i += 1;
                 }
+                // if data[i..].starts_with(b"don't()") { is significantly slower
             } else if data[i] == b'd'
                 && data[i + 1] == b'o'
                 && data[i + 2] == b'n'

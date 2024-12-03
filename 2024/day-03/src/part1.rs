@@ -26,7 +26,7 @@ pub fn solve_puzzle(input: &str) -> String {
     let data = input.as_bytes();
     let mut i = 0;
     while i < data.len() - 8 {
-        if data[i] == b'm' && data[i + 1] == b'u' && data[i + 2] == b'l' && data[i + 3] == b'(' {
+        if data[i..].starts_with(b"mul(") {
             i += 4;
             let mut n = 0;
             let mut first = 0;
