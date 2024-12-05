@@ -24,6 +24,7 @@ Since part2 data is sorted, the search can be limited to a small fraction of the
 use crate::parse_data;
 
 /// The main function for this puzzle.
+#[allow(clippy::comparison_chain)]
 pub fn solve_puzzle(input: &str) -> String {
     let (data_first, data_second) = parse_data(input);
 
@@ -48,6 +49,18 @@ pub fn solve_puzzle(input: &str) -> String {
                 } else if second == first {
                     line_similarity += 1;
                 }
+                // This is actually slower
+                // match second.cmp(&first) {
+                //     std::cmp::Ordering::Greater => {
+                //         if line_similarity > 0 {
+                //             similarity += first * line_similarity;
+                //             search_start += i;
+                //         }
+                //         break;
+                //     }
+                //     std::cmp::Ordering::Equal => line_similarity += 1,
+                //     std::cmp::Ordering::Less => (),
+                // }
             }
             last_first = first
         }

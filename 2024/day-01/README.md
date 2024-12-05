@@ -1,6 +1,6 @@
 # Advent of Code 2024 Day 01
 
-See the description of the puzzle at <https://adventofcode.com/2024/day/01>.  
+See the description of the puzzle at <https://adventofcode.com/2024/day/1>.  
 Many thanks to Eric Wastl for providing these challenges.
 
 MIT License  

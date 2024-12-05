@@ -83,7 +83,7 @@ fn evaluate_line(line: &[Num; MAX_ELEMENTS], len: usize) -> usize {
                 let delta2 = line[p] - line[p - 2];
                 if delta2 != 0 && delta2.abs() <= 3 && (direction_bit == delta2 & FIRST_BIT) {
                     // skip p-1 could work
-                    let mut line2 = line.clone();
+                    let mut line2 = *line;
                     line2.copy_within(p..len, p - 1);
                     if evaluate_line_no_error(&line2, len - 1, direction_bit) == 1 {
                         return 1;
@@ -91,7 +91,7 @@ fn evaluate_line(line: &[Num; MAX_ELEMENTS], len: usize) -> usize {
                 }
             } else {
                 // skip first element
-                let mut line2 = line.clone();
+                let mut line2 = *line;
                 line2.copy_within(1..len, 0);
                 if evaluate_line_no_error(&line2, len - 1, direction_bit) == 1 {
                     return 1;
@@ -100,7 +100,7 @@ fn evaluate_line(line: &[Num; MAX_ELEMENTS], len: usize) -> usize {
             let delta2 = line[p + 1] - line[p - 1];
             if delta2 != 0 && delta2.abs() <= 3 && (direction_bit == delta2 & FIRST_BIT) {
                 // skip p could work
-                let mut line2 = line.clone();
+                let mut line2 = *line;
                 line2.copy_within(p + 1..len, p);
                 return evaluate_line_no_error(&line2, len - 1, direction_bit);
             }
