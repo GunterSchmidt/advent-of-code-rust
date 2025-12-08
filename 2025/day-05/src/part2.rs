@@ -1,7 +1,7 @@
 /*!
 
-# AoC 2025 Day 04 part 2
-See the description of the puzzle at <https://adventofcode.com/2025/day/4>.
+# AoC 2025 Day 05 part 2
+See the description of the puzzle at <https://adventofcode.com/2025/day/5>.
 Many thanks to Eric Wastl for providing these challenges.
 
 MIT License

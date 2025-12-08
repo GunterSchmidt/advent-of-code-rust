@@ -8,11 +8,6 @@ pub mod part2;
 pub const FILENAME_PART_1: &str = "input_day_01.txt";
 pub const FILENAME_PART_2: &str = FILENAME_PART_1;
 
-/// allow print to console and file output
-pub const WITH_OUTPUT_PRINT: bool = false;
-/// allow file output
-pub const WITH_OUTPUT_FILE: bool = false;
-
 type Num = i16;
 
 // This only holds the direction. The alternative to also store the clicks is less clear in code and slower.
